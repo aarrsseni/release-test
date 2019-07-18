@@ -76,8 +76,6 @@
                 <version>2.5.3</version>
                 <configuration>
                     <descriptor>src/main/resources/assembly/assemblies.xml</descriptor>
-                    <finalName>test-release</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>
