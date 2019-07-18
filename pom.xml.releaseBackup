@@ -20,6 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <main.class>release.test.Application</main.class>
         <bootique.version>1.0</bootique.version>
+        <bootique.di.version>1.0-SNAPSHOT</bootique.di.version>
     </properties>
 
     <dependencyManagement>
@@ -93,9 +94,7 @@
     </build>
 
     <scm>
-        <connection>scm:git:https://github.com/aarrsseni/release-test.git</connection>
-        <developerConnection>scm:git:https://github.com/aarrsseni/release-test.git</developerConnection>
-        <url>https://github.com/aarrsseni/release-test</url>
+        <developerConnection>scm:git:git://github.com/release-test</developerConnection>
     </scm>
 
     <profiles>
