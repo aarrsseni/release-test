@@ -1,12 +1,10 @@
 language: java
 install: true
 jdk:
-- openjdk11
-script:
-- mvn clean verify
+ - openjdk11
 
-before_deploy:
-  - mvn clean install
+script:
+ - mvn clean package
 
 deploy:
   provider: bintray
