@@ -3,6 +3,10 @@ jdk:
 - openjdk11
 script:
 - mvn clean verify
+
+before_deploy:
+  - mvn clean verify
+
 deploy:
   provider: bintray
   file: descriptor.json
