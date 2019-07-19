@@ -16,16 +16,15 @@
   },
 
   "version": {
-    "name": "1.1",
+    "name": "env.RELEASE_VERSION",
     "desc": "This is a version",
-    "released": "2019-07-18",
-    "vcs_tag": "1.1",
+    "vcs_tag": "env.RELEASE_VERSION",
     "gpgSign": false
   },
 
   "files":
   [
-    {"includePattern": "\/home\/travis\/build\/aarrsseni\/release-test\/target\/(.*\.zip)", "uploadPattern": "/$1"}
+    {"includePattern": "target\/(.*\.zip)", "uploadPattern": "/$1"}
   ],
   "publish": true
 }

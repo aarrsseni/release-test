@@ -1,3 +1,6 @@
+env:
+ - RELEASE_VERSION=${project.version}
+
 os:
  - linux
  - osx
@@ -8,7 +11,7 @@ jdk:
  - openjdk11
 
 script:
- - mvn clean package
+ - mvn clean package -P $TRAVIS_OS_NAME
 
 deploy:
   provider: bintray
