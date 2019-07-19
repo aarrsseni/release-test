@@ -1,6 +1,3 @@
-env:
- - RELEASE_VERSION=${project.version}
-
 os:
  - linux
  - osx
