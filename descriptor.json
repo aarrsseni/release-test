@@ -25,7 +25,7 @@
 
   "files":
   [
-    {"includePattern": "\/home\/travis\/build\/aarrsseni\/release-test\/target\/(.*\.zip)", "uploadPattern": "/$1"}
+    {"includePattern": "target\/(.*\.zip)", "uploadPattern": "/$1"}
   ],
   "publish": true
 }
