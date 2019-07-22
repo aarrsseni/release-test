@@ -3,7 +3,7 @@ env:
   - secure: TaDnMoV1QdFT0i30fFMLgIFG8xCVxG70t9Qht6BtKlYmVtly1e35Ee4UfQuF8KAo0jmpQNdhX/dUkkp9vJDyhmjtGBL/l8yaNoFaLF5ilIHZR2dAu1KCvJp+gkuSVXEq/7HwSI4//ehJTI6DdzwC+wFQcNNoDt9O/VVSpGJJvE1vWcnWGTCjq4UekjPbA/xeAa0HW/EiTIcjx5XIloOFirNkcfhN0mvM7D0Uy2QcfFKLmS3MsTjIkgkAu7kwJbD2gR5hxYjWKfudfD2kqRKYbSIgzB+J/fBzarxhPDX2lEz/3HWNcq/yR6POEf3gqdhbmNsLoXeVrURX9qOmhoIh+4NtEMvaogCCOfc43swJQ2sqAX8RchV9zP6i9ueQ7V+XA5uJO2QjcFXStqe6i8sBZn4pwzcm3ATVNrWfh8YlaC5aNxb0cRYadKAQNYCNYF31p6saghbydv45FiYfYfMzUf9zGrSJiTo4WV/CHPL26p/qUXvdxAcKwzqWM5cvdogm2FWL+o57KC4ZgNV4B3cdfz6GDk6zk1vRRsjDHzIxtSFJfOn44NQaI4wG81JrIyL/EPPazqvqXUhSCLwOy7uuWhkSeEnbAVZtnwLqDQ9fNwgBfNjQ2q43HEkyyenAZc3nrjLlRFIbW08hb2Uue+IYN4iX08BGUdied2K9SPbIXh4=
 
 os:
- - linux
+# - linux
  - osx
 
 language: java
@@ -12,21 +12,24 @@ jdk:
  - openjdk11
 
 script:
- - mvn clean package -P $TRAVIS_OS_NAME
+ - curl -O https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-darwin-amd64-19.1.1.tar.gz
+ - sudo mv graalvm-ce-19.1.1 /Library/Java/JavaVirtualMachines
+ - /usr/libexec/java_home -v 1.8
+# - mvn clean package -P $TRAVIS_OS_NAME
 
-deploy:
-  provider: bintray
-  file: descriptor.json
-  user: aarrsseni
-  key:
-    secure: SnQXLgjgKs+LSXOBAuy0zSe80fozN5250Yo/n5Uj80r7CHkSuqYQM4EpL05CcAdRVzxW7huixY5HMmFj3V5DazsMrwJA+8Dh/+D6CNs65VgoeJQtCMBKbboMSbaA7lozOupr6ixNtX5x/jXUQSHUF7LN/n5uA1EH3qkn2QmkT/g6+MBCkD5O622ClhXKL6D9LBo1H4VGL43MtPlea91LMhTzhwk4xmnVgJ6u0wHF+M4QDR7yNHlgQHEjxAHG+t4sresTcisjXyQlQ1DO6MdRs3KgqhWkFkj+pWNzDdguYxmVyozVwplAAOZu7eIgxkse1inWpylQ13LIau7Nb0pdjZO7kdkQDhY8sqIsb/6OFTidwydoUHhvYZkD8Ol63NUVuNmYv1IxZjg4h8MKhGjRYt/eFA41qIFpyHMrVrHXZpPyBH9Vo629jWZGPJrMzyk1zCXOTkBUG6Zx2EOkHGbYuT9wgJe0CUwXM1tRCXusgHcFGq1HiKDXinq1H3d/XOqVBsubN8Xj7fNw4UfJq9MzWEoBnX5OXBQPM4bUsHc8eDWutpPfjS9WmibGQfZf8/U97PFn8a7pPTPkt348tjiCiC1FoDNS5FFsfvbO5fGhLdErSHapZSRqTVlHleonDbkKEBjNxqMh60PYWR3BfemLqfFtBTeG+Qu8EqJsQtMNM9A=
-  skip_cleanup: true
-  on:
-   branch: master
-   tags: true
-
-after_deploy:
- - if [ $TRAVIS_OS_NAME == "osx" ]; then
-     chmod +x ./update.sh;
-     ./update.sh;
-   fi
+#deploy:
+#  provider: bintray
+#  file: descriptor.json
+#  user: aarrsseni
+#  key:
+#    secure: SnQXLgjgKs+LSXOBAuy0zSe80fozN5250Yo/n5Uj80r7CHkSuqYQM4EpL05CcAdRVzxW7huixY5HMmFj3V5DazsMrwJA+8Dh/+D6CNs65VgoeJQtCMBKbboMSbaA7lozOupr6ixNtX5x/jXUQSHUF7LN/n5uA1EH3qkn2QmkT/g6+MBCkD5O622ClhXKL6D9LBo1H4VGL43MtPlea91LMhTzhwk4xmnVgJ6u0wHF+M4QDR7yNHlgQHEjxAHG+t4sresTcisjXyQlQ1DO6MdRs3KgqhWkFkj+pWNzDdguYxmVyozVwplAAOZu7eIgxkse1inWpylQ13LIau7Nb0pdjZO7kdkQDhY8sqIsb/6OFTidwydoUHhvYZkD8Ol63NUVuNmYv1IxZjg4h8MKhGjRYt/eFA41qIFpyHMrVrHXZpPyBH9Vo629jWZGPJrMzyk1zCXOTkBUG6Zx2EOkHGbYuT9wgJe0CUwXM1tRCXusgHcFGq1HiKDXinq1H3d/XOqVBsubN8Xj7fNw4UfJq9MzWEoBnX5OXBQPM4bUsHc8eDWutpPfjS9WmibGQfZf8/U97PFn8a7pPTPkt348tjiCiC1FoDNS5FFsfvbO5fGhLdErSHapZSRqTVlHleonDbkKEBjNxqMh60PYWR3BfemLqfFtBTeG+Qu8EqJsQtMNM9A=
+#  skip_cleanup: true
+#  on:
+#   branch: master
+#   tags: true
+#
+#after_deploy:
+# - if [ $TRAVIS_OS_NAME == "osx" ]; then
+#     chmod +x ./update.sh;
+#     ./update.sh;
+#   fi
