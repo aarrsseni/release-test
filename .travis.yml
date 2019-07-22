@@ -24,8 +24,8 @@ deploy:
    branch: master
    tags: true
 
-#after_deploy:
-# - if [ $TRAVIS_OS_NAME == "osx" ]; then
-#     chmod +x ./update.sh;
-#     ./update.sh;
-#   fi
+after_deploy:
+ - if [ $TRAVIS_OS_NAME == "osx" ]; then
+     chmod +x ./update.sh;
+     ./update.sh;
+   fi
