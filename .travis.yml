@@ -22,4 +22,5 @@ deploy:
    tags: true
 
 after_deploy:
+ - chmod +x ./update.sh
  - ./update.sh
