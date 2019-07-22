@@ -105,31 +105,6 @@
             </build>
         </profile>
         <profile>
-            <id>native-image</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.oracle.substratevm</groupId>
-                        <artifactId>native-image-maven-plugin</artifactId>
-                        <version>19.0.2</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>native-image</goal>
-                                </goals>
-                                <phase>package</phase>
-                                <configuration>
-                                    <imageName>${project.name}-${project.version}</imageName>
-                                    <!-- - -no-server -->
-                                    <buildArgs>--report-unsupported-elements-at-runtime --no-fallback</buildArgs>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>assembly</id>
             <build>
                 <plugins>
