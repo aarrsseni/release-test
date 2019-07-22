@@ -5,6 +5,8 @@ cd temp-homebrew
 git clone https://github.com/aarrsseni/homebrew-test-release
 cd homebrew-test-release
 git remote add origin-deploy https://${GITHUB_TOKEN}@github.com/aarrsseni/homebrew-test-release.git
+git remote
+
 cd Formula
 PREV_NAME=$(grep -o 'file_path=.*$' bq.rb | cut -c11-)
 PREV_NAME=${PREV_NAME%?}
