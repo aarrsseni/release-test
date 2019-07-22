@@ -9,6 +9,7 @@ PREV_NAME=$(grep -o 'file_path=.*$' bq.rb | cut -c11-)
 PREV_NAME=${PREV_NAME%?};
 echo $PREV_NAME
 sed -i '.bak' "s/$PREV_NAME/$NAME/g" bq.rb
+cat bq.rb
 git add .
 git commit -m "Update formula version"
 git push origin master
