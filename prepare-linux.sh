@@ -11,6 +11,7 @@
 #
 #fpm -s zip -t rpm -n rpmbuild ${FILE_ZIP}
 
-sudo apt-get install -f ./test_1.0_amd64.deb
+sudo dpkg -i ./test_1.0_amd64.deb
+sudo apt-get install -f
 dpkg -s test |  grep Status
 test
