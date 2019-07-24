@@ -8,16 +8,16 @@ script:
  - chmod +x ./prepare-linux.sh
  - ./prepare-linux.sh
 
-
-
-
-
-
-
-
-
-
-
+deploy:
+  provider: bintray
+  file: deploy-deb.json
+  user: aarrsseni
+  key:
+    secure: SnQXLgjgKs+LSXOBAuy0zSe80fozN5250Yo/n5Uj80r7CHkSuqYQM4EpL05CcAdRVzxW7huixY5HMmFj3V5DazsMrwJA+8Dh/+D6CNs65VgoeJQtCMBKbboMSbaA7lozOupr6ixNtX5x/jXUQSHUF7LN/n5uA1EH3qkn2QmkT/g6+MBCkD5O622ClhXKL6D9LBo1H4VGL43MtPlea91LMhTzhwk4xmnVgJ6u0wHF+M4QDR7yNHlgQHEjxAHG+t4sresTcisjXyQlQ1DO6MdRs3KgqhWkFkj+pWNzDdguYxmVyozVwplAAOZu7eIgxkse1inWpylQ13LIau7Nb0pdjZO7kdkQDhY8sqIsb/6OFTidwydoUHhvYZkD8Ol63NUVuNmYv1IxZjg4h8MKhGjRYt/eFA41qIFpyHMrVrHXZpPyBH9Vo629jWZGPJrMzyk1zCXOTkBUG6Zx2EOkHGbYuT9wgJe0CUwXM1tRCXusgHcFGq1HiKDXinq1H3d/XOqVBsubN8Xj7fNw4UfJq9MzWEoBnX5OXBQPM4bUsHc8eDWutpPfjS9WmibGQfZf8/U97PFn8a7pPTPkt348tjiCiC1FoDNS5FFsfvbO5fGhLdErSHapZSRqTVlHleonDbkKEBjNxqMh60PYWR3BfemLqfFtBTeG+Qu8EqJsQtMNM9A=
+  skip_cleanup: true
+  on:
+   branch: master
+   tags: true
 
 
 

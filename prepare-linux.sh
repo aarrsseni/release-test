@@ -33,16 +33,10 @@ sudo apt-get install -f
 
 pwd
 
-cp ./release-test-1.15-SNAPSHOT.deb ../
+cp ./release-test-1.15-SNAPSHOT.deb ../target/
 
-cd ..
+cd ../target
 
 pwd
 
 ls
-
-
-#/Library/Java/JavaVirtualMachines/graalvm-ce-19.1.1/Contents/Home/bin/gu install native-image
-#mvn clean package
-#NAME=$(basename $(find . -type f -name 'release-test-*.jar'))
-#native-image -jar target/${NAME}
