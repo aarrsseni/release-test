@@ -12,31 +12,29 @@ cd release-deb
 native-image -jar ../target/${NAME}
 PACK_NAME=$(ls)
 chmod +x ${PACK_NAME}
-
 mkdir packageroot
 mkdir packageroot/DEBIAN
 touch packageroot/DEBIAN/control
-echo 'Package: release-test-1.15-SNAPSHOT
+
+printf 'Package: $s
 Version: 1.0.0-1
 Architecture: all
 Maintainer: John Doe <john@doe.com>
 Description: test
-' > packageroot/DEBIAN/control
-
+' "$PACK_NAME" > packageroot/DEBIAN/control
+cat packageroot/DEBIAN/control
 mkdir -p packageroot/usr/bin
 cp ${PACK_NAME} packageroot/usr/bin/
-
 dpkg-deb -b packageroot ${PACK_NAME}.deb
-
 sudo dpkg -i ./${PACK_NAME}.deb
 sudo apt-get install -f
 
-pwd
-
-cp ./release-test-1.15-SNAPSHOT.deb ../target/
+DEB_PACK=$(find . -type f -name 'release-test-*.deb')
+echo ${DEB_PACK}
+cp ${DEB_PACK} ../target/
 
 cd ../target
 
 pwd
-
 ls
+
