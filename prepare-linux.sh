@@ -1,17 +1,48 @@
-#sudo apt-get install ruby ruby-dev rubygems build-essential
-#
-#sudo apt-get install rpmbuild
-#
-#gem install --no-ri --no-rdoc fpm
-#fpm --version
-#
-#mvn clean install -P assembly
-#FILE_ZIP=$(find . -type f -name 'release-test-*.zip')
-#echo ${FILE_ZIP}
-#
-#fpm -s zip -t rpm -n rpmbuild ${FILE_ZIP}
+curl -OL https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz
+tar zxf graalvm-ce-linux-amd64-19.1.1.tar.gz
+sudo mv graalvm-ce-19.1.1 /usr/lib/jvm/
+export JAVA_HOME=/usr/lib/jvm/graalvm-ce-19.1.1
+export PATH=$PATH:${JAVA_HOME}/bin
 
-sudo dpkg -i ./test_1.0_amd64.deb
+mvn clean install
+${JAVA_HOME}/bin/gu install native-image
+NAME=$(basename $(find . -type f -name 'release-test-*.jar'))
+mkdir release-deb
+cd release-deb
+native-image -jar ../target/${NAME}
+PACK_NAME=$(ls)
+chmod +x ${PACK_NAME}
+
+mkdir packageroot
+mkdir packageroot/DEBIAN
+touch packageroot/DEBIAN/control
+echo 'Package: release-test-1.15-SNAPSHOT
+Version: 1.0.0-1
+Architecture: all
+Maintainer: John Doe <john@doe.com>
+Description: test
+' > packageroot/DEBIAN/control
+
+mkdir -p packageroot/usr/bin
+cp ${PACK_NAME} packageroot/usr/bin/
+
+dpkg-deb -b packageroot ${PACK_NAME}.deb
+
+sudo dpkg -i ./${PACK_NAME}.deb
 sudo apt-get install -f
-dpkg -s test |  grep Status
-test
+
+pwd
+
+cp ./release-test-1.15-SNAPSHOT.deb ../
+
+cd ..
+
+pwd
+
+ls
+
+
+#/Library/Java/JavaVirtualMachines/graalvm-ce-19.1.1/Contents/Home/bin/gu install native-image
+#mvn clean package
+#NAME=$(basename $(find . -type f -name 'release-test-*.jar'))
+#native-image -jar target/${NAME}
