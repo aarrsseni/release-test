@@ -13,4 +13,4 @@
 
 sudo apt-get install -f ./test_1.0_amd64.deb
 dpkg -s test |  grep Status
-./test
+test
