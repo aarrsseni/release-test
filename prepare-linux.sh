@@ -16,12 +16,15 @@ mkdir packageroot
 mkdir packageroot/DEBIAN
 touch packageroot/DEBIAN/control
 
+VERSION=$(echo "$PACK_NAME" | cut -d'-' -f 3)
+
 echo "Package: $PACK_NAME
-Version: 1.0.0-1
-Architecture: all
+Version: $VERSION
+Architecture: amd64
 Maintainer: John Doe <john@doe.com>
 Description: test
 " > packageroot/DEBIAN/control
+
 cat packageroot/DEBIAN/control
 mkdir -p packageroot/usr/bin
 cp ${PACK_NAME} packageroot/usr/bin/
@@ -35,6 +38,13 @@ cp ${DEB_PACK} ../target/
 
 cd ../target
 
+# convert to rpm
+sudo apt-get update
+sudo apt-get install alien
+alien --to-rpm --scripts ${PACK_NAME}.deb
+
 pwd
 ls
+
+
 
