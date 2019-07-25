@@ -40,13 +40,9 @@ cd ../target
 
 # convert to rpm
 sudo apt-get update
-#sudo apt-get install alien
-#alien --to-rpm --scripts ${PACK_NAME}.deb
-
 sudo apt-get install rpm
 sudo apt-get install ruby ruby-dev rubygems build-essential
 gem install --no-ri --no-rdoc fpm
-fpm --version
 
 fpm -t rpm -s deb ${PACK_NAME}.deb
 
