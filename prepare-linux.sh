@@ -43,6 +43,8 @@ sudo apt-get update
 sudo apt-get install alien
 alien --to-rpm --scripts ${PACK_NAME}.deb
 
+rpmbuild
+
 pwd
 ls
 
