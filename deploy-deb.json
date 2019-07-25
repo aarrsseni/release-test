@@ -1,4 +1,4 @@
-{
+[{
   "package": {
     "name": "release-test-deb",
     "repo": "release-test-deb",
@@ -16,8 +16,8 @@
   },
 
   "version": {
-    "name": "1.15",
-    "vcs_tag": "1.15",
+    "name": "1.18",
+    "vcs_tag": "1.18",
     "gpgSign": false
   },
 
@@ -31,4 +31,34 @@
     }
   ],
   "publish": true
-}
+},
+  {
+    "package": {
+      "name": "release-rpm",
+      "repo": "release-rpm",
+      "subject": "aarrsseni",
+      "desc": "I was pushed completely automatically",
+      "website_url": "www.jfrog.com",
+      "issue_tracker_url": "https://github.com/aarrsseni/release-test/issues",
+      "vcs_url": "https://github.com/aarrsseni/release-test",
+      "github_use_tag_release_notes": true,
+      "github_release_notes_file": "RELEASE.txt",
+      "licenses": ["Apache-2.0"],
+      "labels": ["cool", "awesome"],
+      "public_download_numbers": false,
+      "public_stats": false
+    },
+
+    "version": {
+      "name": "1.18",
+      "vcs_tag": "1.18",
+      "gpgSign": false
+    },
+
+    "files":
+    [
+      {"includePattern": "target\/(.*\.rpm)", "uploadPattern": "/$1"}
+    ],
+    "publish": true
+  }
+]
