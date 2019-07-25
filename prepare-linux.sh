@@ -16,12 +16,12 @@ mkdir packageroot
 mkdir packageroot/DEBIAN
 touch packageroot/DEBIAN/control
 
-printf 'Package: $s
+echo "Package: $PACK_NAME
 Version: 1.0.0-1
 Architecture: all
 Maintainer: John Doe <john@doe.com>
 Description: test
-' "$PACK_NAME" > packageroot/DEBIAN/control
+" > packageroot/DEBIAN/control
 cat packageroot/DEBIAN/control
 mkdir -p packageroot/usr/bin
 cp ${PACK_NAME} packageroot/usr/bin/
