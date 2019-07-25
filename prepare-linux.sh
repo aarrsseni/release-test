@@ -43,7 +43,9 @@ sudo apt-get update
 sudo apt-get install alien
 alien --to-rpm --scripts ${PACK_NAME}.deb
 
-rpmbuild
+sudo apt-get install rpm
+
+sudo apt-get install rpmrebuild
 
 pwd
 ls
