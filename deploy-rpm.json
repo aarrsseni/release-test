@@ -1,7 +1,7 @@
 {
   "package": {
-    "name": "release-test-deb",
-    "repo": "release-test-deb",
+    "name": "release-rpm",
+    "repo": "release-rpm",
     "subject": "aarrsseni",
     "desc": "I was pushed completely automatically",
     "website_url": "www.jfrog.com",
@@ -23,12 +23,7 @@
 
   "files":
   [
-    {"includePattern": "target\/(.*\.deb)", "uploadPattern": "/$1",
-      "matrixParams": {
-        "deb_distribution": "vivid",
-        "deb_component": "main",
-        "deb_architecture": "amd64"}
-    }
+    {"includePattern": "target\/(.*\.rpm)", "uploadPattern": "/$1"}
   ],
   "publish": true
 }
