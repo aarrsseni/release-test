@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 curl -OL https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-darwin-amd64-19.1.1.tar.gz
 tar zxf graalvm-ce-darwin-amd64-19.1.1.tar.gz
 sudo mv graalvm-ce-19.1.1 /Library/Java/JavaVirtualMachines

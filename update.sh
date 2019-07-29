@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 NAME=$(basename $(find . -type f -name 'release-test-*.zip'))
 echo ${NAME}
 mkdir temp-homebrew

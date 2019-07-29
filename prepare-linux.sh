@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 curl -OL https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz
 tar zxf graalvm-ce-linux-amd64-19.1.1.tar.gz
 sudo mv graalvm-ce-19.1.1 /usr/lib/jvm/
@@ -22,7 +23,7 @@ echo "Package: $PACK_NAME
 Version: $VERSION
 Architecture: amd64
 Maintainer: John Doe <john@doe.com>
-Description: test
+Description: teste
 " > packageroot/DEBIAN/control
 
 cat packageroot/DEBIAN/control
