@@ -16,10 +16,12 @@ export JAVA_HOME="/c/Program Files/GraalVM/graalvm-ce-19.1.0"
 #echo ${PWD}
 
 
-choco uninstall vcredist140 --force --forcedependencies
+#choco uninstall vcredist140 --force --forcedependencies
 
 choco install windows-sdk-7.1
 
 cd "/c/Program Files/Microsoft SDKs/Windows/v7.1/Bin"
+
+ls
 
 ./SetEnv
