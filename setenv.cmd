@@ -29,6 +29,9 @@
 ::SET "TARGET_CPU=x86"
 ::SET "Configuration=Debug"
 ::SET "TARGET_PLATFORM=WIN7"
+
+Reg Delete "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" /V "Functions" /F > NUL
+
 IF "x%TARGET_CPU%x"=="xx" (
 IF /I "%PROCESSOR_ARCHITECTURE%"=="x86" SET "TARGET_CPU=x86" & SET "CURRENT_CPU=x86"
 IF /I "%PROCESSOR_ARCHITEW6432%"=="x86" SET "TARGET_CPU=x86" & SET "CURRENT_CPU=x86"
@@ -126,8 +129,8 @@ IF "%CURRENT_CPU%"=="x86" (
   SET Path32=%ProgramFiles(x86)%
 )
 :: set VS default paths
-SET "VCINSTALLDIR=%Path32%\Microsoft Visual Studio 10.0\VC\"
-SET "VSINSTALLDIR=%Path32%\Microsoft Visual Studio 10.0\"
+SET "VCINSTALLDIR=%Path32%\Microsoft Visual Studio 14.0\VC\"
+SET "VSINSTALLDIR=%Path32%\Microsoft Visual Studio 14.0\"
 :: clear the temp variable
 SET Path32=
 :: set WinSDK default dir
@@ -151,8 +154,8 @@ GOTO Done_SetRegPath
 :SetRegPathFor64Bit
 SET RegKeyPath=HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VisualStudio\SxS\VC7
 SET VSRegKeyPath=HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VisualStudio\SxS\VS7
-SET "VCINSTALLDIR=%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\"
-SET "VSINSTALLDIR=%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\"
+SET "VCINSTALLDIR=%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\"
+SET "VSINSTALLDIR=%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\"
 :: if 64 bit
 IF EXIST "%FrameworkDir64%" (
   SET "FrameworkDir=%FrameworkDir64%"

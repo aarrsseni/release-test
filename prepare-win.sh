@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#choco install graalvm
+choco install graalvm
 
 # TODO: can this be done by chocolatey? or something else more robust?
 #export JAVA_HOME="/c/Program Files/GraalVM/graalvm-ce-19.1.0"
@@ -13,25 +13,19 @@
 #NAME=$(find . -type f -name 'release-test-*.jar')
 #echo ${NAME}
 
-#WORK_DIR=$(pwd)
+WORK_DIR=$(pwd)
 #echo ${WORK_DIR}
 
-choco uninstall KB2919355 --force-dependencies
-choco uninstall KB2919442 --force-dependencies
-choco uninstall KB2999226 --force-dependencies
-choco uninstall KB3033929 --force-dependencies
-choco uninstall KB3035131 --force-dependencies
-choco uninstall microsoft-build-tools --force-dependencies
-choco uninstall vcredist140 --force-dependencies
-choco uninstall vcredist2017 --force-dependencies
-choco uninstall visualstudio2017buildtools --force-dependencies
-choco uninstall visualstudio2017-installer --force-dependencies
-choco uninstall visualstudio2017-workload-netcorebuildtools --force-dependencies
-choco uninstall visualstudio2017-workload-vctools --force-dependencies
-choco uninstall visualstudio2017-workload-webbuildtools --force-dependencies
+#cuninst dotnet4.6.2 -y --skipautouninstaller
+#cuninst microsoft-build-tools -y --skipautouninstaller
+#cuninst visualstudio2017-workload-vctools -y --skipautouninstaller
+#cuninst vcredist2017 -y --skipautouninstaller
+#cuninst vcredist140 -y --skipautouninstaller
+#cuninst visualstudio2017-workload-webbuildtools -y --skipautouninstaller
+#cuninst visualstudio2017-workload-netcorebuildtools -y --skipautouninstaller
+#cuninst visualstudio2017buildtools -y --skipautouninstaller
 
-choco install windows-sdk-7.1
-
+choco install windows-sdk-7.1 -y --force --force-dependencies
 
 #cd "/c/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin"
 #ls
@@ -44,6 +38,6 @@ choco install windows-sdk-7.1
 
 #ls
 
-cd "${JAVA_HOME}/bin"
+#cd "${JAVA_HOME}/bin"
 
-./native-image.cmd -jar "${WORK_DIR}/target/release-test-1.22-SNAPSHOT.jar"
+#./native-image.cmd -jar "${WORK_DIR}/target/release-test-1.22-SNAPSHOT.jar"
