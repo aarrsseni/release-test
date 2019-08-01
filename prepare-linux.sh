@@ -46,7 +46,7 @@ sudo apt-get install rpm
 sudo apt-get install ruby ruby-dev rubygems build-essential
 gem install --no-ri --no-rdoc fpm
 
-fpm -t rpm -s deb ${PACK_NAME}.deb
+fpm -t rpm -s --name {PACK_NAME} deb ${PACK_NAME}.deb
 
 pwd
 ls
