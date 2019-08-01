@@ -30,11 +30,11 @@ cat packageroot/DEBIAN/control
 
 mkdir -p packageroot/usr/bin
 cp ${PACK_NAME} packageroot/usr/bin/
-dpkg-deb -b packageroot ${PACK_NAME}.deb
-sudo dpkg -i ./${PACK_NAME}.deb
+dpkg-deb -b packageroot ${PACK_NAME}-${VERSION}.deb
+sudo dpkg -i ./${PACK_NAME}-${VERSION}.deb
 sudo apt-get install -f
 
-DEB_PACK=$(find . -type f -name 'release-test.deb')
+DEB_PACK=$(find . -type f -name 'release-test-*.deb')
 echo ${DEB_PACK}
 cp ${DEB_PACK} ../target/
 
@@ -46,7 +46,7 @@ sudo apt-get install rpm
 sudo apt-get install ruby ruby-dev rubygems build-essential
 gem install --no-ri --no-rdoc fpm
 
-fpm -t rpm -s --name {PACK_NAME} deb ${PACK_NAME}.deb
+fpm -t rpm -s --name {PACK_NAME}-${VERSION} deb ${PACK_NAME}-${VERSION}.deb
 
 pwd
 ls

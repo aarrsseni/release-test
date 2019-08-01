@@ -24,6 +24,8 @@ sed -i '.bak' "s/$PREV_NAME/$NAME/g" release-test.rb
 
 sed -i '.bak' "s/$PREV_CHECKSUM/$CHECKSUM/g" release-test.rb
 
+cat release-test.rb
+
 git add .
 git commit -m "Update formula version"
 git push origin-deploy master
