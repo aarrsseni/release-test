@@ -53,8 +53,8 @@ deploy:
 
 after_deploy:
  - if [ $TRAVIS_OS_NAME == "osx" ]; then
-  chmod +x ./update.sh;
-  ./update.sh;
+  chmod +x ./update-homebrew.sh;
+  ./update-homebrew.sh;
   fi
 
 

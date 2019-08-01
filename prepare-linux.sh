@@ -10,23 +10,24 @@ ${JAVA_HOME}/bin/gu install native-image
 NAME=$(basename $(find . -type f -name 'release-test-*.jar'))
 mkdir release-deb
 cd release-deb
-native-image -jar ../target/${NAME}
+native-image -jar ../target/${NAME} -H:Name=release-test
 PACK_NAME=$(ls)
 chmod +x ${PACK_NAME}
 mkdir packageroot
 mkdir packageroot/DEBIAN
 touch packageroot/DEBIAN/control
 
-VERSION=$(echo "$PACK_NAME" | cut -d'-' -f 3)
+VERSION=$(echo "${NAME%.*}" | cut -d'-' -f 3)
 
 echo "Package: $PACK_NAME
 Version: $VERSION
 Architecture: amd64
 Maintainer: John Doe <john@doe.com>
-Description: teste
+Description: test
 " > packageroot/DEBIAN/control
 
 cat packageroot/DEBIAN/control
+
 mkdir -p packageroot/usr/bin
 cp ${PACK_NAME} packageroot/usr/bin/
 dpkg-deb -b packageroot ${PACK_NAME}.deb

@@ -7,5 +7,5 @@ export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-19.1.1/Contents/Home/bi
 /Library/Java/JavaVirtualMachines/graalvm-ce-19.1.1/Contents/Home/bin/gu install native-image
 mvn clean package
 NAME=$(basename $(find . -type f -name 'release-test-*.jar'))
-native-image -jar target/${NAME}
+native-image -H:Name=release-test -jar target/${NAME} -H:Name=release-test
 mvn package -P assembly
