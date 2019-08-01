@@ -17,7 +17,7 @@ cat release-test.rb
 PREV_NAME=$(grep -o 'file_path=.*$' release-test.rb | cut -c11-)
 PREV_NAME=${PREV_NAME%?}
 
-PREV_CHECKSUM_FROM_FILE=$(grep -o 'sha256.*$' release-test.rb | cut -c11-)
+PREV_CHECKSUM_FROM_FILE=$(grep -o 'sha256.*$' release-test.rb | cut -c9-)
 PREV_CHECKSUM=${PREV_CHECKSUM_FROM_FILE%?}
 
 echo ${PREV_NAME}
