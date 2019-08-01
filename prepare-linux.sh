@@ -34,7 +34,7 @@ dpkg-deb -b packageroot ${PACK_NAME}.deb
 sudo dpkg -i ./${PACK_NAME}.deb
 sudo apt-get install -f
 
-DEB_PACK=$(find . -type f -name 'release-test-*.deb')
+DEB_PACK=$(find . -type f -name 'release-test.deb')
 echo ${DEB_PACK}
 cp ${DEB_PACK} ../target/
 

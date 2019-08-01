@@ -18,6 +18,8 @@ PREV_CHECKSUM_FROM_FILE=$(grep -o 'sha256.*$' release-test.rb | cut -c11-)
 PREV_CHECKSUM=${PREV_CHECKSUM_FROM_FILE%?}
 
 echo ${PREV_NAME}
+echo ${PREV_CHECKSUM}
+
 sed -i '.bak' "s/$PREV_NAME/$NAME/g" release-test.rb
 
 sed -i '.bak' "s/$PREV_CHECKSUM/$CHECKSUM/g" release-test.rb
