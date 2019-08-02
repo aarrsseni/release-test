@@ -3,6 +3,6 @@ package release.test;
 public class Application {
 
     public static void main(String[] args) {
-        System.out.println("test Updated3 !!!!!!!");
+        System.out.println("This is new version!");
     }
 }
