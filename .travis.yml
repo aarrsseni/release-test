@@ -57,10 +57,6 @@ after_deploy:
   chmod +x ./update-homebrew.sh;
   ./update-homebrew.sh;
   fi
- - if [ $TRAVIS_OS_NAME == "linux" ]; then
-   chmod +x ./update-rpm.sh;
-   ./update-rpm.sh;
-   fi
 
 
 

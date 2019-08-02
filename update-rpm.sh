@@ -1,1 +1,0 @@
-curl -X POST -u aarrsseni:${BINTRAY_KEY} https://api.bintray.com/calc_metadata/aarrsseni/release-rpm
