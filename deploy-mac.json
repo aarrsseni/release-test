@@ -16,9 +16,9 @@
   },
 
   "version": {
-    "name": "1.33",
-    "vcs_tag": "1.33",
-    "gpgSign": false
+    "name": "1.34",
+    "vcs_tag": "1.34",
+    "gpgSign": true
   },
 
   "files":
