@@ -16,8 +16,8 @@
   },
 
   "version": {
-    "name": "${project.version}",
-    "vcs_tag": "${project.version}",
+    "name": "$RELEASE_VERSION",
+    "vcs_tag": "$RELEASE_VERSION",
     "gpgSign": true
   },
 
