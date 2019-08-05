@@ -16,8 +16,8 @@
   },
 
   "version": {
-    "name": "$RELEASE_VERSION",
-    "vcs_tag": "$RELEASE_VERSION",
+    "name": "1.52",
+    "vcs_tag": "1.52",
     "gpgSign": true
   },
 
