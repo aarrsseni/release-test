@@ -1,0 +1,15 @@
+environment:
+  global:
+    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
+    # /E:ON and /V:ON options are not enabled in the batch script intepreter
+    # See: http://stackoverflow.com/a/13751649/163740
+    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\.ci\\run_with_env.cmd"
+
+init:
+  - cinst graalvm
+  - set PATH=C:\Program Files\GraalVM\graalvm-ce-19.1.0\bin;%PATH%
+
+build_script:
+  - mvn clean install
+  - "%CMD_IN_ENV% native-image -jar target\release-test-1.52-SNAPSHOT.jar -H:Name=release-test"
+#  - native-image -jar target\release-test-1.52-SNAPSHOT.jar -H:Name=release-test
