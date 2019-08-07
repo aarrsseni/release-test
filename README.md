@@ -6,7 +6,7 @@ Test release
 ### First step
 
 - Create two github repos(Main repo and repo for brew)
-- Create three bintray repos (Generic for mac, rpm and debian)
+- Create four bintray repos (Generic for mac, rpm, debian and for windows)
 
 ### Gpg signing
 
