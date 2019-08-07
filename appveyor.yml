@@ -3,17 +3,18 @@ environment:
     # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
     # /E:ON and /V:ON options are not enabled in the batch script intepreter
     # See: http://stackoverflow.com/a/13751649/163740
-    WITH_COMPILER: "cmd /E:ON /V:ON /C .\\run_with_env.cmd"
+    WITH_COMPILER: "cmd /E:ON /V:ON .\\run_with_env.cmd /x64 /release"
 
 init:
   - cinst graalvm
   - set PATH=C:\Program Files\GraalVM\graalvm-ce-19.1.0\bin;%PATH%
 
-image: Previous Visual Studio 2013
+image: Visual Studio 2015
 
 build_script:
+  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - mvn clean install
 #  - native-image -jar target\release-test-1.52-SNAPSHOT.jar -H:Name=release-test
 
 test_script:
-  - "%WITH_COMPILER% native-image -jar target\release-test-1.52-SNAPSHOT.jar -H:Name=release-test"
+  - native-image -jar target/release-test-1.52-SNAPSHOT.jar -H:Name=release-test
