@@ -8,12 +8,9 @@ image: Visual Studio 2015
 build_script:
   - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - mvn clean install
-#  - dir /b target\release-test-*.jar
   - for /f %%i in ('dir /b target\release-test-*.jar') do set JAR_NAME=%%i
-#  - set JAR_NAME=%dir /b target\release-test-*.jar%
   - native-image -jar target\%JAR_NAME% -H:Name=release-test
-#  - mvn clean package -P assembly
-#  - ls
+  - mvn clean package -P assembly
 
 artifacts:
   - path: target/*.zip
