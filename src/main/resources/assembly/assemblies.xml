@@ -19,6 +19,7 @@
             <outputDirectory>/bin/</outputDirectory>
             <includes>
                 <include>${project.name}</include>
+                <include>${project.name}.exe</include>
             </includes>
         </fileSet>
     </fileSets>
