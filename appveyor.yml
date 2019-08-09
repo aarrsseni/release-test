@@ -11,9 +11,28 @@ build_script:
   - for /f %%i in ('dir /b target\release-test-*.jar') do set JAR_NAME=%%i
   - native-image -jar target\%JAR_NAME% -H:Name=release-test
   - mvn clean package -P assembly
+  - ls
 
-artifacts:
-  - path: target/*.zip
+#artifacts:
+#  - path: target/*.zip
+
+before_deploy:
+  - ps: |
+      # Create Chocolately Package
+
+      # Because the bits need to be signed by MSFT, we are no longer using
+      # the compiled version, but instead we'll use the one from the WDK.
+      # The only problem is that the WDK versions aren't signed by MSFT either.
+
+       Copy-Item -Path .\release-test.exe `
+        -Destination .\release-test.portable\release-test.exe
+
+      Set-Location -Path .\release-test.portable\
+      (Get-Content '.\release-test.portable.nuspec' -Raw).Replace("<version>1.0</version>", "<version>$($env:APPVEYOR_BUILD_VERSION)</version>") | Out-File '.\release-test.portable.nuspec'
+      Choco Pack
+      Push-AppveyorArtifact ".\release-test.portable.$($ENV:APPVEYOR_BUILD_VERSION).nupkg"
+      choco install "release-test.portable" -fdv  -s ".\"
+      release-test
 
 deploy:
   - provider: BinTray
@@ -23,9 +42,9 @@ deploy:
     subject: aarrsseni
     repo: release-test-win
     package: release-win
-    version: 1.53
+    version: 1.55
     publish: true
     override: true
     explode: true
-    on:
-      APPVEYOR_REPO_TAG: true # keep casing this way for Linux builds where variables are case-sensitive
+#    on:
+#      APPVEYOR_REPO_TAG: true # keep casing this way for Linux builds where variables are case-sensitive
