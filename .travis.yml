@@ -11,6 +11,8 @@ os:
  - linux
  - osx
 
+dist: bionic
+
 language: java
 install: true
 

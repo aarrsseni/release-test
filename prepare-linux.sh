@@ -28,18 +28,9 @@ Description: test
 
 cat packageroot/DEBIAN/control
 
-touch packageroot/DEBIAN/rules
-echo "override_dh_builddeb:
-        dh_builddeb -- --no-uniform-compression" > packageroot/DEBIAN/rules
-
-cat packageroot/DEBIAN/rules
-
 mkdir -p packageroot/usr/bin
 cp ${PACK_NAME} packageroot/usr/bin/
 dpkg-deb -b packageroot ${PACK_NAME}-${VERSION}.deb
-
-echo '-------'
-ar t ${PACK_NAME}-${VERSION}.deb
 
 sudo dpkg -i ./${PACK_NAME}-${VERSION}.deb
 sudo apt-get install -f
