@@ -8,7 +8,7 @@ env:
 
 
 os:
-# - linux
+ - linux
  - osx
 
 language: java
