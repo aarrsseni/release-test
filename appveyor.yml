@@ -40,7 +40,7 @@ deploy:
     subject: aarrsseni
     repo: release-test-win
     package: release-win
-    version: $env:APPVEYOR_REPO_TAG_NAME
+    version: $($env:APPVEYOR_REPO_TAG_NAME)
     publish: true
     override: true
     explode: true
