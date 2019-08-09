@@ -37,6 +37,10 @@ cat packageroot/DEBIAN/rules
 mkdir -p packageroot/usr/bin
 cp ${PACK_NAME} packageroot/usr/bin/
 dpkg-deb -b packageroot ${PACK_NAME}-${VERSION}.deb
+
+echo '-------'
+ar t ${PACK_NAME}-${VERSION}.deb
+
 sudo dpkg -i ./${PACK_NAME}-${VERSION}.deb
 sudo apt-get install -f
 
