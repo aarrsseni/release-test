@@ -46,3 +46,9 @@ deploy:
     explode: true
     on:
       APPVEYOR_REPO_TAG: true # keep casing this way for Linux builds where variables are case-sensitive
+
+after_deploy:
+  - ps: |
+#      Set-Location -Path .\release-test.portable\
+#      choco apikey -k [API_KEY_HERE] -source https://push.chocolatey.org/
+#      choco push package-name.1.1.0.nupkg -s https://push.chocolatey.org/

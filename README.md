@@ -53,3 +53,8 @@ For user
 Example
 
 - brew install aarrsseni/homebrew-test-release/release-test
+
+#### Docs to provide choco install
+
+For local installation 
+- choco install "release-test.portable" -fdv  -s .\ 
