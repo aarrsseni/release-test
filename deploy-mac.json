@@ -16,7 +16,6 @@
   },
 
   "version": {
-    "name": $TRAVIS_TAG,
     "gpgSign": true
   },
 

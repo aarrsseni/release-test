@@ -14,7 +14,7 @@ Test release
 - Add encrypted passphrase to travis.yml to deploy stage
 
 ### Release
-- mvn release:prepare 
+- mvn release:prepare -Dtag=TAG_SAME_WITH_RELEASE_VERSION -DreleaseVersion=RELEASE_VERSION -DdevelopmentVersion=NEXT_DEV_VERSION
 - mvn release:perform -Darguments="-Dmaven.deploy.skip=true" (To finish release and cleanup)
 
 
