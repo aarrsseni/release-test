@@ -25,6 +25,33 @@ script:
    fi
 
 deploy:
+  - provider: script
+    skip_cleanup: true
+    script:
+      cd target;
+      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-test/release-test/$TRAVIS_TAG/release-test-$TRAVIS_TAG.zip?publish=1
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME == "osx"
+      tags: true
+  - provider: script
+    skip_cleanup: true
+    script:
+      cd target;
+      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-test-deb/release-test-deb/$TRAVIS_TAG/release-test-$TRAVIS_TAG.deb?publish=1
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME == "linux"
+      tags: true
+  - provider: script
+    skip_cleanup: true
+    script:
+      cd target;
+      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-rpm/release-rpm/$TRAVIS_TAG/release-test-$TRAVIS_TAG-1.x86_64.rpm?publish=1
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME == "linux"
+      tags: true
 # - provider: bintray
 #   file: deploy-deb.json
 #   user: aarrsseni
@@ -49,15 +76,6 @@ deploy:
 #    branch: master
 #    condition: $TRAVIS_OS_NAME == "linux"
 #    tags: true
-  - provider: script
-    skip_cleanup: true
-    script:
-      cd target;
-      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-test/release-test/1.58/release-test-1.58-SNAPSHOT.zip?publish=1
-    on:
-      branch: master
-#      condition: $TRAVIS_OS_NAME == "osx"
-#      tags: true
 # - provider: bintray
 #   file: deploy-mac.json
 #   user: aarrsseni
