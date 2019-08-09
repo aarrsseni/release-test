@@ -28,9 +28,9 @@ before_deploy:
         -Destination .\release-test.portable\release-test.exe
 
       Set-Location -Path .\release-test.portable\
-      (Get-Content '.\release-test.portable.nuspec' -Raw).Replace("<version>1.0</version>", "<version>$($env:APPVEYOR_BUILD_VERSION)</version>") | Out-File '.\release-test.portable.nuspec'
+      (Get-Content '.\release-test.portable.nuspec' -Raw).Replace("<version>1.0</version>", "<version>$($env:APPVEYOR_REPO_TAG_NAME)</version>") | Out-File '.\release-test.portable.nuspec'
       Choco Pack
-      Push-AppveyorArtifact ".\release-test.portable.$($ENV:APPVEYOR_BUILD_VERSION).nupkg"
+      Push-AppveyorArtifact ".\release-test.portable.$($ENV:APPVEYOR_REPO_TAG_NAME).nupkg"
 
 deploy:
   - provider: BinTray
@@ -40,7 +40,7 @@ deploy:
     subject: aarrsseni
     repo: release-test-win
     package: release-win
-    version: 1.55
+    version: $env:APPVEYOR_REPO_TAG_NAME
     publish: true
     override: true
     explode: true
