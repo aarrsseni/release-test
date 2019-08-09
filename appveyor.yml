@@ -31,8 +31,6 @@ before_deploy:
       (Get-Content '.\release-test.portable.nuspec' -Raw).Replace("<version>1.0</version>", "<version>$($env:APPVEYOR_BUILD_VERSION)</version>") | Out-File '.\release-test.portable.nuspec'
       Choco Pack
       Push-AppveyorArtifact ".\release-test.portable.$($ENV:APPVEYOR_BUILD_VERSION).nupkg"
-      choco install "release-test.portable" -fdv  -s ".\"
-      release-test
 
 deploy:
   - provider: BinTray
@@ -46,5 +44,5 @@ deploy:
     publish: true
     override: true
     explode: true
-#    on:
-#      APPVEYOR_REPO_TAG: true # keep casing this way for Linux builds where variables are case-sensitive
+    on:
+      APPVEYOR_REPO_TAG: true # keep casing this way for Linux builds where variables are case-sensitive
