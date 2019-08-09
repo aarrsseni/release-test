@@ -11,8 +11,6 @@ os:
  - linux
  - osx
 
-dist: bionic
-
 language: java
 install: true
 
@@ -39,8 +37,8 @@ deploy:
   - provider: script
     skip_cleanup: true
     script:
-      cd target;
-      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY -H X-Bintray-Debian-Distribution:vivid -H X-Bintray-Debian-Component:main -H X-Bintray-Debian-Architecture:amd64 --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-test-deb/release-test-deb/$TRAVIS_TAG/release-test-$TRAVIS_TAG.deb?publish=1
+#      cd target;
+      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY -H X-Bintray-Debian-Distribution:vivid -H X-Bintray-Debian-Component:main -H X-Bintray-Debian-Architecture:amd64 --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-test-deb/release-test-deb/$TRAVIS_TAG/target/release-test-$TRAVIS_TAG.deb?publish=1
     on:
       branch: master
       condition: $TRAVIS_OS_NAME == "linux"
@@ -48,8 +46,8 @@ deploy:
   - provider: script
     skip_cleanup: true
     script:
-      cd target;
-      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-rpm/release-rpm/$TRAVIS_TAG/release-test-$TRAVIS_TAG-1.x86_64.rpm?publish=1
+#      cd target;
+      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-rpm/release-rpm/$TRAVIS_TAG/target/release-test-$TRAVIS_TAG-1.x86_64.rpm?publish=1
     on:
       branch: master
       condition: $TRAVIS_OS_NAME == "linux"
