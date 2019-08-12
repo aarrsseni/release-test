@@ -16,8 +16,8 @@
   },
 
   "version": {
-    "name": "1.53",
-    "vcs_tag": "1.53",
+    "name": "template_version",
+    "vcs_tag": "template_tag",
     "gpgSign": true
   },
 

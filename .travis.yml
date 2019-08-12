@@ -24,6 +24,12 @@ script:
     ./prepare-linux.sh;
    fi
 
+before_deploy:
+  - if [ $TRAVIS_OS_NAME == "linux" ]; then
+    chmod +x ./update-version.sh;
+    ./update-version.sh;
+    fi
+
 deploy:
   - provider: script
     skip_cleanup: true
@@ -34,48 +40,48 @@ deploy:
       branch: master
       condition: $TRAVIS_OS_NAME == "osx"
       tags: true
-  - provider: script
-    skip_cleanup: true
-    script:
+#  - provider: script
+#    skip_cleanup: true
+#    script:
 #      cd target;
-      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY -H X-Bintray-Debian-Distribution:vivid -H X-Bintray-Debian-Component:main -H X-Bintray-Debian-Architecture:amd64 --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-test-deb/release-test-deb/$TRAVIS_TAG/target/release-test-$TRAVIS_TAG.deb?publish=1
+#      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY -H X-Bintray-Debian-Distribution:vivid -H X-Bintray-Debian-Component:main -H X-Bintray-Debian-Architecture:amd64 --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-test-deb/release-test-deb/$TRAVIS_TAG/release-test-$TRAVIS_TAG.deb?publish=1
+#    on:
+#      branch: master
+#      condition: $TRAVIS_OS_NAME == "linux"
+#      tags: true
+#  - provider: script
+#    skip_cleanup: true
+#    script:
+#      cd target;
+#      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-rpm/release-rpm/$TRAVIS_TAG/release-test-$TRAVIS_TAG-1.x86_64.rpm?publish=1
+#    on:
+#      branch: master
+#      condition: $TRAVIS_OS_NAME == "linux"
+#      tags: true
+  - provider: bintray
+    file: deploy-deb.json
+    user: aarrsseni
+    key:
+      secure: SnQXLgjgKs+LSXOBAuy0zSe80fozN5250Yo/n5Uj80r7CHkSuqYQM4EpL05CcAdRVzxW7huixY5HMmFj3V5DazsMrwJA+8Dh/+D6CNs65VgoeJQtCMBKbboMSbaA7lozOupr6ixNtX5x/jXUQSHUF7LN/n5uA1EH3qkn2QmkT/g6+MBCkD5O622ClhXKL6D9LBo1H4VGL43MtPlea91LMhTzhwk4xmnVgJ6u0wHF+M4QDR7yNHlgQHEjxAHG+t4sresTcisjXyQlQ1DO6MdRs3KgqhWkFkj+pWNzDdguYxmVyozVwplAAOZu7eIgxkse1inWpylQ13LIau7Nb0pdjZO7kdkQDhY8sqIsb/6OFTidwydoUHhvYZkD8Ol63NUVuNmYv1IxZjg4h8MKhGjRYt/eFA41qIFpyHMrVrHXZpPyBH9Vo629jWZGPJrMzyk1zCXOTkBUG6Zx2EOkHGbYuT9wgJe0CUwXM1tRCXusgHcFGq1HiKDXinq1H3d/XOqVBsubN8Xj7fNw4UfJq9MzWEoBnX5OXBQPM4bUsHc8eDWutpPfjS9WmibGQfZf8/U97PFn8a7pPTPkt348tjiCiC1FoDNS5FFsfvbO5fGhLdErSHapZSRqTVlHleonDbkKEBjNxqMh60PYWR3BfemLqfFtBTeG+Qu8EqJsQtMNM9A=
+    passphrase:
+      secure: aRddMXp9914VHcEyTh3xA6WEiDl/ayU8CSRL0bGQ5Bkf/z3Vke8zDj+VindcDew3BwKBg+vSuXez8/rGX50Tya0UQ9Gx6wL84bgYGWnQ2C2ZvKuj2pVCFYqJ9Q7ARiMQrHsVxieLrhABU7b2s0Uc2BE8RaQjNbQVWCwiNcmi901Q3FDOwuve9b3OkbJVKDC4jQiQsXgGoYCCXXhXZX1W493TI0Mtto6EZ5Z5b65U0Qe42j0WexpSXLjDtdqzDFwb+1ourR+sXrJ/NbPFH/D6W5IbGX8B6oLOVmRk3Rz1hfgvNuiRjlOUOSgTiYUctTs4UE3bqjRuD9n+MJp9Mwy4qa88CGX7Qs9QR2LPj7OJvMxAuEe3ZYZlKb0/3EYUCDJb/t8Xc4VZvnFAHm4/PpsesG/G2x6IVi96jb2KojPUG0mmR8UW+THLFYl/DFLO/6YtBb75luebkdwHY8nzYHI24f4LoW2A7mUUNcZcyoVAMPjK/hi8FgsLd1BxozI/uE2wdk/Ie/da2mccgOs369wZflgXDILcqy/gXBHVDVwfsoKC57TlUbJhtkrAl7zcP0O7ImKNYIDQ8IQfMyXkC+vUsNVce+r2DVcExs4rMIJhkDwMkGtU/nmSjbCzgA73odeDTQkXfnrd5YtXEHGUg3BiAK0Paopn4684Vg7WQcDjyQs=
+    skip_cleanup: true
     on:
       branch: master
       condition: $TRAVIS_OS_NAME == "linux"
       tags: true
-  - provider: script
+  - provider: bintray
+    file: deploy-rpm.json
+    user: aarrsseni
+    key:
+      secure: SnQXLgjgKs+LSXOBAuy0zSe80fozN5250Yo/n5Uj80r7CHkSuqYQM4EpL05CcAdRVzxW7huixY5HMmFj3V5DazsMrwJA+8Dh/+D6CNs65VgoeJQtCMBKbboMSbaA7lozOupr6ixNtX5x/jXUQSHUF7LN/n5uA1EH3qkn2QmkT/g6+MBCkD5O622ClhXKL6D9LBo1H4VGL43MtPlea91LMhTzhwk4xmnVgJ6u0wHF+M4QDR7yNHlgQHEjxAHG+t4sresTcisjXyQlQ1DO6MdRs3KgqhWkFkj+pWNzDdguYxmVyozVwplAAOZu7eIgxkse1inWpylQ13LIau7Nb0pdjZO7kdkQDhY8sqIsb/6OFTidwydoUHhvYZkD8Ol63NUVuNmYv1IxZjg4h8MKhGjRYt/eFA41qIFpyHMrVrHXZpPyBH9Vo629jWZGPJrMzyk1zCXOTkBUG6Zx2EOkHGbYuT9wgJe0CUwXM1tRCXusgHcFGq1HiKDXinq1H3d/XOqVBsubN8Xj7fNw4UfJq9MzWEoBnX5OXBQPM4bUsHc8eDWutpPfjS9WmibGQfZf8/U97PFn8a7pPTPkt348tjiCiC1FoDNS5FFsfvbO5fGhLdErSHapZSRqTVlHleonDbkKEBjNxqMh60PYWR3BfemLqfFtBTeG+Qu8EqJsQtMNM9A=
+    passphrase:
+      secure: aRddMXp9914VHcEyTh3xA6WEiDl/ayU8CSRL0bGQ5Bkf/z3Vke8zDj+VindcDew3BwKBg+vSuXez8/rGX50Tya0UQ9Gx6wL84bgYGWnQ2C2ZvKuj2pVCFYqJ9Q7ARiMQrHsVxieLrhABU7b2s0Uc2BE8RaQjNbQVWCwiNcmi901Q3FDOwuve9b3OkbJVKDC4jQiQsXgGoYCCXXhXZX1W493TI0Mtto6EZ5Z5b65U0Qe42j0WexpSXLjDtdqzDFwb+1ourR+sXrJ/NbPFH/D6W5IbGX8B6oLOVmRk3Rz1hfgvNuiRjlOUOSgTiYUctTs4UE3bqjRuD9n+MJp9Mwy4qa88CGX7Qs9QR2LPj7OJvMxAuEe3ZYZlKb0/3EYUCDJb/t8Xc4VZvnFAHm4/PpsesG/G2x6IVi96jb2KojPUG0mmR8UW+THLFYl/DFLO/6YtBb75luebkdwHY8nzYHI24f4LoW2A7mUUNcZcyoVAMPjK/hi8FgsLd1BxozI/uE2wdk/Ie/da2mccgOs369wZflgXDILcqy/gXBHVDVwfsoKC57TlUbJhtkrAl7zcP0O7ImKNYIDQ8IQfMyXkC+vUsNVce+r2DVcExs4rMIJhkDwMkGtU/nmSjbCzgA73odeDTQkXfnrd5YtXEHGUg3BiAK0Paopn4684Vg7WQcDjyQs=
     skip_cleanup: true
-    script:
-#      cd target;
-      curl -X PUT -H X-GPG-PASSPHRASE:$PASSPHRASE_BINTRAY --basic -u aarrsseni:$BINTRAY_API_KEY https://api.bintray.com/content/aarrsseni/release-rpm/release-rpm/$TRAVIS_TAG/target/release-test-$TRAVIS_TAG-1.x86_64.rpm?publish=1
     on:
       branch: master
       condition: $TRAVIS_OS_NAME == "linux"
       tags: true
-# - provider: bintray
-#   file: deploy-deb.json
-#   user: aarrsseni
-#   key:
-#    secure: SnQXLgjgKs+LSXOBAuy0zSe80fozN5250Yo/n5Uj80r7CHkSuqYQM4EpL05CcAdRVzxW7huixY5HMmFj3V5DazsMrwJA+8Dh/+D6CNs65VgoeJQtCMBKbboMSbaA7lozOupr6ixNtX5x/jXUQSHUF7LN/n5uA1EH3qkn2QmkT/g6+MBCkD5O622ClhXKL6D9LBo1H4VGL43MtPlea91LMhTzhwk4xmnVgJ6u0wHF+M4QDR7yNHlgQHEjxAHG+t4sresTcisjXyQlQ1DO6MdRs3KgqhWkFkj+pWNzDdguYxmVyozVwplAAOZu7eIgxkse1inWpylQ13LIau7Nb0pdjZO7kdkQDhY8sqIsb/6OFTidwydoUHhvYZkD8Ol63NUVuNmYv1IxZjg4h8MKhGjRYt/eFA41qIFpyHMrVrHXZpPyBH9Vo629jWZGPJrMzyk1zCXOTkBUG6Zx2EOkHGbYuT9wgJe0CUwXM1tRCXusgHcFGq1HiKDXinq1H3d/XOqVBsubN8Xj7fNw4UfJq9MzWEoBnX5OXBQPM4bUsHc8eDWutpPfjS9WmibGQfZf8/U97PFn8a7pPTPkt348tjiCiC1FoDNS5FFsfvbO5fGhLdErSHapZSRqTVlHleonDbkKEBjNxqMh60PYWR3BfemLqfFtBTeG+Qu8EqJsQtMNM9A=
-#   passphrase:
-#     secure: aRddMXp9914VHcEyTh3xA6WEiDl/ayU8CSRL0bGQ5Bkf/z3Vke8zDj+VindcDew3BwKBg+vSuXez8/rGX50Tya0UQ9Gx6wL84bgYGWnQ2C2ZvKuj2pVCFYqJ9Q7ARiMQrHsVxieLrhABU7b2s0Uc2BE8RaQjNbQVWCwiNcmi901Q3FDOwuve9b3OkbJVKDC4jQiQsXgGoYCCXXhXZX1W493TI0Mtto6EZ5Z5b65U0Qe42j0WexpSXLjDtdqzDFwb+1ourR+sXrJ/NbPFH/D6W5IbGX8B6oLOVmRk3Rz1hfgvNuiRjlOUOSgTiYUctTs4UE3bqjRuD9n+MJp9Mwy4qa88CGX7Qs9QR2LPj7OJvMxAuEe3ZYZlKb0/3EYUCDJb/t8Xc4VZvnFAHm4/PpsesG/G2x6IVi96jb2KojPUG0mmR8UW+THLFYl/DFLO/6YtBb75luebkdwHY8nzYHI24f4LoW2A7mUUNcZcyoVAMPjK/hi8FgsLd1BxozI/uE2wdk/Ie/da2mccgOs369wZflgXDILcqy/gXBHVDVwfsoKC57TlUbJhtkrAl7zcP0O7ImKNYIDQ8IQfMyXkC+vUsNVce+r2DVcExs4rMIJhkDwMkGtU/nmSjbCzgA73odeDTQkXfnrd5YtXEHGUg3BiAK0Paopn4684Vg7WQcDjyQs=
-#   skip_cleanup: true
-#   on:
-#    branch: master
-#    condition: $TRAVIS_OS_NAME == "linux"
-#    tags: true
-# - provider: bintray
-#   file: deploy-rpm.json
-#   user: aarrsseni
-#   key:
-#    secure: SnQXLgjgKs+LSXOBAuy0zSe80fozN5250Yo/n5Uj80r7CHkSuqYQM4EpL05CcAdRVzxW7huixY5HMmFj3V5DazsMrwJA+8Dh/+D6CNs65VgoeJQtCMBKbboMSbaA7lozOupr6ixNtX5x/jXUQSHUF7LN/n5uA1EH3qkn2QmkT/g6+MBCkD5O622ClhXKL6D9LBo1H4VGL43MtPlea91LMhTzhwk4xmnVgJ6u0wHF+M4QDR7yNHlgQHEjxAHG+t4sresTcisjXyQlQ1DO6MdRs3KgqhWkFkj+pWNzDdguYxmVyozVwplAAOZu7eIgxkse1inWpylQ13LIau7Nb0pdjZO7kdkQDhY8sqIsb/6OFTidwydoUHhvYZkD8Ol63NUVuNmYv1IxZjg4h8MKhGjRYt/eFA41qIFpyHMrVrHXZpPyBH9Vo629jWZGPJrMzyk1zCXOTkBUG6Zx2EOkHGbYuT9wgJe0CUwXM1tRCXusgHcFGq1HiKDXinq1H3d/XOqVBsubN8Xj7fNw4UfJq9MzWEoBnX5OXBQPM4bUsHc8eDWutpPfjS9WmibGQfZf8/U97PFn8a7pPTPkt348tjiCiC1FoDNS5FFsfvbO5fGhLdErSHapZSRqTVlHleonDbkKEBjNxqMh60PYWR3BfemLqfFtBTeG+Qu8EqJsQtMNM9A=
-#   passphrase:
-#     secure: aRddMXp9914VHcEyTh3xA6WEiDl/ayU8CSRL0bGQ5Bkf/z3Vke8zDj+VindcDew3BwKBg+vSuXez8/rGX50Tya0UQ9Gx6wL84bgYGWnQ2C2ZvKuj2pVCFYqJ9Q7ARiMQrHsVxieLrhABU7b2s0Uc2BE8RaQjNbQVWCwiNcmi901Q3FDOwuve9b3OkbJVKDC4jQiQsXgGoYCCXXhXZX1W493TI0Mtto6EZ5Z5b65U0Qe42j0WexpSXLjDtdqzDFwb+1ourR+sXrJ/NbPFH/D6W5IbGX8B6oLOVmRk3Rz1hfgvNuiRjlOUOSgTiYUctTs4UE3bqjRuD9n+MJp9Mwy4qa88CGX7Qs9QR2LPj7OJvMxAuEe3ZYZlKb0/3EYUCDJb/t8Xc4VZvnFAHm4/PpsesG/G2x6IVi96jb2KojPUG0mmR8UW+THLFYl/DFLO/6YtBb75luebkdwHY8nzYHI24f4LoW2A7mUUNcZcyoVAMPjK/hi8FgsLd1BxozI/uE2wdk/Ie/da2mccgOs369wZflgXDILcqy/gXBHVDVwfsoKC57TlUbJhtkrAl7zcP0O7ImKNYIDQ8IQfMyXkC+vUsNVce+r2DVcExs4rMIJhkDwMkGtU/nmSjbCzgA73odeDTQkXfnrd5YtXEHGUg3BiAK0Paopn4684Vg7WQcDjyQs=
-#   skip_cleanup: true
-#   on:
-#    branch: master
-#    condition: $TRAVIS_OS_NAME == "linux"
-#    tags: true
 # - provider: bintray
 #   file: deploy-mac.json
 #   user: aarrsseni
